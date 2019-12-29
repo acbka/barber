@@ -29,7 +29,7 @@ var lastId,
    });
 menuItems.click(function(e){
    var href = $(this).attr("href"),
-      offsetTop = href === "#" ? 0 : $(href).offset().top-menuHeight+1;
+      offsetTop = href === "#" ? 0 : $(href).offset().top+1;
    $('html, body').stop().animate({ 
       scrollTop: offsetTop
    }, 300);
@@ -54,10 +54,12 @@ $(window).scroll(function(){
 }
 
 function slider(){
+   /*
    $(window).resize(function(){
       var sliderImg = $(".slider-img").height();
       $(".slider").css("height", sliderImg + "px");
    })
+   */
 	$('.next').click(function(){ 
       event.preventDefault();
       var currentImage = $(".img.current");

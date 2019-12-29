@@ -3,6 +3,7 @@ $beige: #fcfbf9;
 //$green: #363014;
 $green: #443938;
 $white: #fff;
+$height: 80vw;
 @mixin button {
    width: 250px;
    height: 60px;
@@ -25,9 +26,6 @@ body{
    margin: 0;
    padding: 0;
    background-color: $beige;
-}
-a{
-   text-decoration: none;
 }
 h2{
    color: $gold;
@@ -57,25 +55,25 @@ nav{
    background: $green;
    box-sizing: border-box;
    display: flex;
+   justify-content: space-between;
    position: fixed;
    width: 100%;
+   box-shadow: 0 0 10px #000;
    z-index: 8;
 }
 .nav-wrap{
    display: flex;
-   padding: 10px 20px;
    justify-content: space-between;
+   align-items: center;
+   padding: 10px 20px;
    width: 100%;
-}
-.logo{
-   padding-top: 15px;
 }
 ul{
    display: flex;
    list-style: none;
 }  
 a{
-   display: block;
+   display: inline-block;
    padding: 5px;
    color: $gold;
    margin: 0 5px;
@@ -238,19 +236,20 @@ a:active:before, a.active:before{
    width: 50%;
    margin: 0 auto;
 }
+
+
 .sld{
    background: url(./../img/gallery-bg.jpg) no-repeat;
    padding: 15px;
 }
 .slider-wrap{
-   width: 100%;
+   width: 100%;   
    margin: 0 auto;
    position: relative;
-   
 }
 .slider{
-   width: 80%;
-   height: 550px;
+   width: $height;
+   height: calc(#{$height} / 2);
    margin: 20px auto;
    position: relative;
    overflow: hidden;
@@ -270,12 +269,12 @@ a:active:before, a.active:before{
 }
 .prev{
    position: absolute;
-   bottom: 50%; 
+   bottom: 45%;
    z-index: 1;
 }
 .next{
    position: absolute;
-   bottom: 50%;
+   bottom: 45%;
    right: 0;
    z-index: 1;
 }
@@ -291,10 +290,12 @@ a:active:before, a.active:before{
 }
 .map{
    width: 100%;
+   
    background: $green;
 }
 iframe{
    width: 100%;
+   height: calc(#{$height} / 2);
 }
 .bottom{
    display: flex;
@@ -382,6 +383,7 @@ input{
 @media screen and (max-width: 768px) {
    .nav-wrap{
       flex-direction: column;
+      align-items: flex-start;
    }
    .toggle{
       display: block;  
@@ -410,15 +412,35 @@ input{
    .container{
       padding: 0;
    }
+   .container-right,
+   .container-left {
+      margin: 0 30px;
+  }
    .bottom{
       flex-direction: column;
    }
 }
 
 @media screen and (max-width: 425px){
+   .nav-wrap{
+      padding:0 20px;
+   }
+   .toggle{
+      padding: 10px 20px 0 0;
+   }
+   .logo{
+      padding: 0;
+   }
    .subtitle{
       font-size: 0.9rem;
       line-height: 1.2rem;
+   }
+   .slider{
+      height: calc(#{$height} / 3 * 2);
+   }
+   iframe{
+      width: 100%;
+      height: calc(#{$height} / 3 * 2);
    }
 }
 @media screen and (max-width: 320px){
@@ -445,8 +467,4 @@ input{
    .sld{
       padding: 15px 0;
    }
-   .container-right,
-   .container-left {
-      margin: 0 30px;
-  }
 }
