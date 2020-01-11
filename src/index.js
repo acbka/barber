@@ -17,40 +17,40 @@ function mainMenu(){
 }
 
 function scrollMenu(){
-var lastId,
-   menu = $("#menu"),
-   menuHeight = menu.outerHeight()+15,
-   menuItems = menu.find("a"),
-   scrollItems = menuItems.map(function(){
-   var item = $($(this).attr("href"));
+   var lastId,
+      menu = $("#menu"),
+      menuHeight = $(".nav-wrap").outerHeight(),
+      menuItems = menu.find("a"),
+      scrollItems = menuItems.map(function(){
+      var item = $($(this).attr("href"));
    if (item.length) { 
       return item; 
    }
    });
-menuItems.click(function(e){
-   var href = $(this).attr("href"),
-      offsetTop = href === "#" ? 0 : $(href).offset().top+1;
-   $('html, body').stop().animate({ 
-      scrollTop: offsetTop
-   }, 300);
-   $("ul").removeClass("active");
-   e.preventDefault();
-});
-$(window).scroll(function(){
-   var fromTop = $(this).scrollTop()+menuHeight;
-   var cur = scrollItems.map(function(){
-      if ($(this).offset().top < fromTop)
-      return this;
+   menuItems.click(function(e){
+      var href = $(this).attr("href"),
+         offsetTop = href === "#" ? 0 : $(href).offset().top - menuHeight; 
+      $('html, body').stop().animate({ 
+         scrollTop: offsetTop
+      }, 300);
+      $("ul").removeClass("active");
+      e.preventDefault();
    });
-   cur = cur[cur.length-1];
-   var id = cur && cur.length ? cur[0].id : "";  
-   if (lastId !== id) {
-      lastId = id;
-      menuItems
-      .removeClass("active")
-      .filter("[href='#"+id+"']").addClass("active");
-   }                   
-});
+   $(window).scroll(function(){
+      var fromTop = $(this).scrollTop() + menuHeight + 5;
+      var cur = scrollItems.map(function(){
+         if ($(this).offset().top < fromTop)
+         return this;
+      });
+      cur = cur[cur.length-1];
+      var id = cur && cur.length ? cur[0].id : "";  
+      if (lastId !== id) {
+         lastId = id;
+         menuItems
+         .removeClass("active")
+         .filter("[href='#"+id+"']").addClass("active");
+      }                   
+   });
 }
 
 function slider(){
